@@ -23,7 +23,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY()
 	UStaticMeshComponent* Body;
+	
+	UPROPERTY()
 	UStaticMeshComponent* Water;
 
 
