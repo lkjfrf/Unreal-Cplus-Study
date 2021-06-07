@@ -4,13 +4,12 @@
 
 #include "EngineMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Fountain.generated.h"
+#include "Fountain.generated.h" 
 
 UCLASS()
 class SWH_API AFountain : public AActor
 {
 	GENERATED_BODY()
-	
 public:	 
 	// Sets default values for this actor's properties
 	AFountain();
@@ -28,6 +27,7 @@ public:
 	
 	UPROPERTY()
 	UStaticMeshComponent* Water;
+
 
 
 };
