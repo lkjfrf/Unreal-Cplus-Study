@@ -3,6 +3,6 @@
 #include "SWH.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, SWH, "SWH" );
 
-DEFINE_LOG_CATEGORY(MyLogCategorylolz);
+DEFINE_LOG_CATEGORY(SWHlogs);
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, SWH, "SWH" );

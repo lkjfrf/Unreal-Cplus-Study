@@ -53,6 +53,10 @@ void AFountain::BeginPlay()
 {
 	Super::BeginPlay();
 
+	//UE_LOG(SWHlogs, Warning, TEXT("Actor Name : %s, ID : %d, LocationX : %.3f"), *GetName(), ID, GetActorLocation().X);
+
+	ABLOG_S(Warning);
+	ABLOG(Warning, TEXT("Actor Name : %s, ID : %d, Location X : %.3f"), *GetName(), ID, GetActorLocation().X);
 }
 
 // Called every frame

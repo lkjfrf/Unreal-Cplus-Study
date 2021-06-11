@@ -29,7 +29,7 @@ void AMyActor::BeginPlay()
 	UE_LOG(LogTemp, Log, TEXT("Log Message"));
 	UE_LOG(LogTemp, Error, TEXT("Error Message"));
 	UE_LOG(LogTemp, Display, TEXT("Display1121 Message"));
-	UE_LOG(MyLogCategorylolz, Warning, TEXT("meememm ewofjewoefaiwfejoiw"));
+	//UE_LOG(MyLogCategorylolz, Warning, TEXT("meememm ewofjewoefaiwfejoiw"));
 
 
 	FString CharacterName = TEXT("WooHyun");
