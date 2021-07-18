@@ -5,12 +5,14 @@
 #include "SWH.h"
 
 // Sets default values
-AMyActor::AMyActor() : TotalDamage(200)
+AMyActor::AMyActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	UE_LOG(LogTemp, Log, TEXT("ConstructorLOL"));
+	
+	TotalDamage = 200;
 	DamageTimeInSeconds = 100;
-
 	str = TEXT("Testlol");
 }
 
@@ -25,21 +27,6 @@ void AMyActor::BeginPlay()
 	Super::BeginPlay();
 
 	CallFromCpp();
-
-	UE_LOG(LogTemp, Log, TEXT("Log Message"));
-	UE_LOG(LogTemp, Error, TEXT("Error Message"));
-	UE_LOG(LogTemp, Display, TEXT("Display1121 Message"));
-	//UE_LOG(MyLogCategorylolz, Warning, TEXT("meememm ewofjewoefaiwfejoiw"));
-
-
-	FString CharacterName = TEXT("WooHyun");
-	UE_LOG(LogTemp, Log, TEXT("Character Name = %s"), *CharacterName);
-	bool isAttackable = true;
-	int hp = 100;
-	float Attackspeed = 1.0f;
-	UE_LOG(LogTemp, Log, TEXT("okok : %s"), isAttackable ? TEXT("True") : TEXT("False"));
-	UE_LOG(LogTemp, Log, TEXT("%d, %f, %s"), hp, Attackspeed, TEXT("Complite"));
-
 
 }
 

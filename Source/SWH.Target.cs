@@ -10,5 +10,7 @@ public class SWHTarget : TargetRules
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 		ExtraModuleNames.AddRange( new string[] { "SWH" } );
+		ExtraModuleNames.AddRange(new string[] { "ArenaBattle", "WebService", "Characters" });
 	}
+
 }
