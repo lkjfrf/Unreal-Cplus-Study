@@ -65,5 +65,19 @@ void AABPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AABPawn::UpDown);
+	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AABPawn::LeftRight);
 }
+
+void AABPawn::UpDown(float NewAxisValue)
+{
+	ABLOG(Warning, Text("%f"), NewAxisvalue);
+}
+
+void AABPawn::LeftRight(float NewAxisValue)
+{
+	ABLOG(Warning, Text("%f"), NewAxisvalue);
+
+}
+
 
