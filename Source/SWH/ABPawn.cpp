@@ -32,7 +32,16 @@ AABPawn::AABPawn()
 	{
 		Mesh->SetSkeletalMesh(SK_CARDBOARD.Object);
 	}
+
+	Mesh->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+
+	static ConstructorHelpers::FClassFinder<UAnimInstance> WARRIOR_ANIM(TEXT("/Game/Book/Animation/WarriorAnimBlueprint.WarriorAnimBlueprint_C"));
+	if(WARRIOR_ANIM.Succeeded())
+	{
+		Mesh->SetAnimInstanceClass(WARRIOR_ANIM.Class);
+	}
 }
+
 
 // Called when the game starts or when spawned
 void AABPawn::BeginPlay()
@@ -71,13 +80,14 @@ void AABPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AABPawn::UpDown(float NewAxisValue)
 {
-	ABLOG(Warning, Text("%f"), NewAxisvalue);
+	//ABLOG(Warning, TEXT("%f"), NewAxisValue);
+	AddMovementInput(GetActorForwardVector(), NewAxisValue);
 }
 
 void AABPawn::LeftRight(float NewAxisValue)
 {
-	ABLOG(Warning, Text("%f"), NewAxisvalue);
-
+	//ABLOG(Warning, TEXT("%f"), NewAxisValue);
+	AddMovementInput(GetActorRightVector(), NewAxisValue);
 }
 
 

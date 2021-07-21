@@ -14,7 +14,11 @@ class SWH_API AABPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
-public:
+	public:
 	virtual void PostInitializeComponents() override;
 	virtual void OnPossess(APawn* aPawn) override;
+
+	protected:
+	virtual  void BeginPlay() override;
+	
 };
