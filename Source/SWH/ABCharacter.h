@@ -19,6 +19,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	void SetControlMOde(int32 ControlMode);
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -35,4 +37,8 @@ public:
 private:
 	void UpDown(float NewAxisValue);
 	void LeftRight(float NewAxisValue);
+	void LookUp(float NewAxisValue);
+	void Turn(float NewAxisValue);
 };
+
+

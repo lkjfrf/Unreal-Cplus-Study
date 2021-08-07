@@ -11,7 +11,28 @@ AABCharacter::AABCharacter()
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPRINGARM"));
 	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAMERA"));
 
-	
+	SpringArm->SetupAttachment(GetCapsuleComponent());
+	Camera->SetupAttachment(SpringArm);
+
+	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -88.0f), FRotator(0.0f, -90.0f, 0.0f));
+	SpringArm->TargetArmLength = 400.0f;
+	SpringArm->SetRelativeRotation(FRotator(-15.0f, 0.0f, 0.0f));
+
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SK_CARDBOARD(TEXT("/Game/InfinityBladeWarriors/Character/CompleteCharacters/SK_CharM_Cardboard.SK_CharM_Cardboard"));
+	if (SK_CARDBOARD.Succeeded())
+	{
+		GetMesh()->SetSkeletalMesh(SK_CARDBOARD.Object);
+	}
+
+
+    GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+    static ConstructorHelpers::FClassFinder<UAnimInstance> WARRIOR_ANIM(TEXT("/Game/Book/Animations/WarriorAnimBlueprint.WarriorAnimBlueprint_C"));
+    if (WARRIOR_ANIM.Succeeded())
+	{
+		GetMesh()->SetAnimInstanceClass(WARRIOR_ANIM.Class);
+	}
+
+	SetControlMOde(0);
 
 }
 
@@ -20,6 +41,21 @@ void AABCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void AABCharacter::SetControlMOde(int32 ControlMode)
+{
+	if(ControlMode ==0)
+	{
+		SpringArm->TargetArmLength = 450.0f;
+		SpringArm->SetRelativeRotation(FRotator::ZeroRotator);
+		SpringArm->bUsePawnControlRotation = true;
+		SpringArm->bInheritPitch = true;
+		SpringArm->bInheritYaw = true;
+		SpringArm->bInheritRoll = true;
+		SpringArm->bDoCollisionTest = true;
+		bUseControllerRotationYaw = false;
+	}
 }
 
 // Called every frame
@@ -34,5 +70,29 @@ void AABCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AABCharacter::UpDown);
+	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AABCharacter::LeftRight);
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AABCharacter::LookUp);
+	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &AABCharacter::Turn);
+}
+
+void AABCharacter::UpDown(float NewAxisValue)
+{
+	AddMovementInput(GetActorForwardVector(), NewAxisValue);
+}
+
+void AABCharacter::LeftRight(float NewAxisValue)
+{
+	AddMovementInput(GetActorRightVector(), NewAxisValue);
+}
+
+void AABCharacter::LookUp(float NewAxisValue)
+{
+	AddControllerPitchInput(NewAxisValue);
+}
+
+void AABCharacter::Turn(float NewAxisValue)
+{
+	AddControllerYawInput(NewAxisValue);
 }
 
