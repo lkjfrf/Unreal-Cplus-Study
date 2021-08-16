@@ -5,6 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "Factories/FbxSkeletalMeshImportData.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -50,10 +51,11 @@ ATP_ThirdPersonCharacter::ATP_ThirdPersonCharacter()
 	if (SK_Mannequin.Succeeded())
 	{
 		GetMesh()->SetSkeletalMesh(SK_Mannequin.Object);
+		ThirdPersonSkeletal->SetSkeletalMesh(SK_Mannequin.Object);
+		//USkeletalMeshComponent* MeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
 	}
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.0f, 0.0f, -88.0f), FRotator(0.0f, -90.0f, 0.0f));
 
-	
 	GetMesh()->SetAnimationMode(EAnimationMode::AnimationBlueprint);
 	static ConstructorHelpers::FClassFinder<UAnimInstance> ThirdPerson_Anim(TEXT("/Game/ThirdPersonCPP/Blueprints/MyAnimation.MyAnimation_C"));
 	if(ThirdPerson_Anim.Succeeded())

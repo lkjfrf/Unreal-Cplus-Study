@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Engine/TriggerBox.h"
+#include "TP_ThirdPersonCharacter.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "MyTriggerBox.generated.h"
 
 
@@ -18,6 +20,16 @@ public:
 	UFUNCTION()
 	void OnOverlapBegin(class AActor* OverlappedComp, class AActor* OtherActor);
 
-	UFUNCTION()
-	void OnOverlapEnd(class AActor* OverlappedComp, class AActor* OtherActor);
+	UPROPERTY()
+	USceneComponent* Root;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Mesh")
+	class UMeshComponent* TriggerMesh;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Mesh")
+	class USkeletalMeshComponent* CopiedSkeletalMesh;
+
+
+//	ATP_ThirdPersonCharacter* ThirdPersonCharacter = Cast<ATP_ThirdPersonCharacter>(ThirdPersonCharacter);
 };
+

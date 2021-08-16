@@ -10,6 +10,14 @@ AMyTriggerBox::AMyTriggerBox()
 {
 	SetActorHiddenInGame(false);
 	OnActorBeginOverlap.AddDynamic(this, &AMyTriggerBox::OnOverlapBegin);
+
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+
+	CopiedSkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CopiedSkeletalMesh"));
+	//ConstructorHelpers::FObjectFinder<UStaticMesh>Piramid(TEXT("/Game/StarterContent/Shapes/Shape_QuadPyramid"));
+
+	CopiedSkeletalMesh->SetupAttachment(RootComponent);
+	
 }
 
 void AMyTriggerBox::OnOverlapBegin(AActor* OverlappedActor, AActor* OtherActor)
@@ -19,14 +27,16 @@ void AMyTriggerBox::OnOverlapBegin(AActor* OverlappedActor, AActor* OtherActor)
 		print("Overlap Begin");
 		printFString("Overlapped Actor = %s", *OverlappedActor->GetName());
 		printFString("Other Actor = %s", *OtherActor->GetName());
-
-		//UStaticMeshComponent* MeshComponent = *OtherActor->Get;
 		
-		//AttachToComponent(this, );
+		ATP_ThirdPersonCharacter* third = Cast<ATP_ThirdPersonCharacter>(OtherActor);
+		printFString("third = %s", *third->GetName());
 
+		UMeshComponent* thirdMesh = third->GetMesh();
+		printFString("thirdMesh = %s", *thirdMesh->GetName());
+		
+		CopiedSkeletalMesh = third->ThirdPersonSkeletal;
+		printFString("CopiedMesh = %s", *CopiedSkeletalMesh->GetName());
+		
+		CopiedSkeletalMesh->SetupAttachment(RootComponent);
 	}
-}
-
-void AMyTriggerBox::OnOverlapEnd(AActor* OverlappedComp, AActor* OtherActor)
-{
 }
